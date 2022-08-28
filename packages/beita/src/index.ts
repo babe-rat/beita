@@ -1,5 +1,5 @@
 import install from './install'
-import './style'
+import './styles'
 import defineConfig from './defineConfig'
 
 export { defineConfig }
