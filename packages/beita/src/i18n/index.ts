@@ -1,9 +1,9 @@
 import type { App } from 'vue'
 import { createI18n, useI18n } from 'vue-i18n'
+import { eventBus } from '@baberat/utils/t'
 import storage from '../utils/storage'
 import { STORAGE_LOCALE_KEY } from '../utils/constant'
 import { useLocaleStore } from '../store/locale'
-import eventBus from '../utils/eventBus'
 
 export interface LocaleOption {
     locale: string

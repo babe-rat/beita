@@ -10,11 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@baberat/utils": "1.1.1",
+    "@baberat/utils": "1.1.2",
     "element-plus": "^2.2.14",
     "lodash.merge": "^4.6.2",
     "pinia": "^2.0.20",
-    "tiny-emitter": "^2.1.0",
     "vue": "^3.2.37",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.1.3"
