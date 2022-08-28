@@ -1,0 +1,14 @@
+node_modules
+
+dist
+es
+lib
+docs-dist
+
+package.json
+
+.cache
+.docz
+
+*.lock
+*.snap

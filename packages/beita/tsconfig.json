@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "outDir": "/",
+        "jsx": "preserve",
+        "target": "esnext",
+        "module": "esnext",
+        "strict": true,
+        "allowJs": true,
+        "noImplicitThis": true,
+        "importHelpers": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "paths": {
+            "@/*": ["src/*"]
+        }
+    },
+    "include": ["src/**/*", "shims-vue.d.ts", "module.d.ts"],
+    "exclude": ["node_modules"]
+}

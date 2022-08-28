@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "description": "基于 Vue3 封装的管理后台框架",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "dev": "pnpm -C example dev",
+    "build": "pnpm -C example build",
+    "lint": "eslint . --ext .js,.ts,.vue --resolve-plugins-relative-to ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/babe-rat/beita.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/babe-rat/beita/issues"
+  },
+  "homepage": "https://github.com/babe-rat/beita#readme",
+  "devDependencies": {
+    "@baberat/eslint-config-beita": "^1.0.1",
+    "eslint": "^8.22.0",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
+  }
+}
