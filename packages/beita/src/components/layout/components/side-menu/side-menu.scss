@@ -1,0 +1,8 @@
+.side-menu-wrapper {
+    height: 100%;
+    background: #fff;
+    box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
+    & :deep(.el-menu) {
+        border-right: none;
+    }
+}

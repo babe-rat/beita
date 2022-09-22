@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { AppOption } from '../defineConfig'
+import type { AppOption } from '../types'
 
 export interface AppConfigState {
     app: AppOption

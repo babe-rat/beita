@@ -29,7 +29,8 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, toRaw } from 'vue'
+import { reactive, ref, toRaw, getCurrentInstance } from 'vue'
+import { Router } from 'vue-router'
 import type { FormInstance, FormRules } from 'element-plus'
 import { useLocaleStore } from '../../store/locale'
 import { useAppConfigStore } from '../../store/appConfig'
@@ -69,6 +70,8 @@ const rules = reactive<FormRules>({
 })
 
 const events = useAppConfigStore().app.events
+const globalProperties = getCurrentInstance()?.appContext.config.globalProperties
+
 const submit = (formEl: FormInstance | undefined) => {
     if (!formEl) {
         return false
@@ -79,8 +82,9 @@ const submit = (formEl: FormInstance | undefined) => {
                 loading.value = true
                 events
                     .login(toRaw(ruleForm))
-                    .then(() => {
+                    .then((callback: (router: Router) => void | PromiseLike<void>) => {
                         // TODO
+                        callback && callback(globalProperties?.$router)
                     })
                     .catch((error: Error) => {
                         errorMsg.value = error.message

@@ -1,22 +1,33 @@
 import { createApp } from 'vue'
+import { createBeita, useUserStore } from '@baberat/beita'
 import App from './App.vue'
-import beita, { defineConfig } from '@baberat/beita'
+import routes from './router/index'
 
-createApp(App)
-    .use(
-        beita,
-        defineConfig({
-            events: {
-                login({ userName, password }) {
-                    return new Promise((resolve, reject) => {
-                        if (userName === 'admin' && password === 'admin') {
-                            resolve('1')
-                        } else {
-                            reject(new Error('账户或密码错误'))
-                        }
+const beita = createBeita({
+    routes,
+    events: {
+        login({ userName, password }) {
+            return new Promise((resolve, reject) => {
+                if (userName === 'admin' && password === 'admin') {
+                    resolve(router => {
+                        router.push('/dashboard')
+                        useUserStore().setUser({
+                            userId: '123456',
+                            userName: 'Admin',
+                            avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+                        })
                     })
-                },
-            },
-        }),
-    )
-    .mount('#app')
+                } else {
+                    reject(new Error('账户或密码错误'))
+                }
+            })
+        },
+        logout() {
+            return new Promise(resolve => {
+                resolve()
+            })
+        },
+    },
+})
+
+createApp(App).use(beita).mount('#app')

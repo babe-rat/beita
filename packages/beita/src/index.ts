@@ -1,7 +1,6 @@
-import install from './install'
 import './styles'
-import defineConfig from './defineConfig'
+import createBeita from './createBeita'
 
-export { defineConfig }
+export * from './store'
 
-export default install
+export { createBeita }
