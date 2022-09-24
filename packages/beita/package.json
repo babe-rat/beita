@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@baberat/utils": "1.1.2",
+    "@element-plus/icons-vue": "^2.0.9",
     "element-plus": "^2.2.14",
     "lodash.merge": "^4.6.2",
     "pinia": "^2.0.20",

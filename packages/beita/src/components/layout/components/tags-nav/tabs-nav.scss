@@ -1,0 +1,86 @@
+$tabs-header-height: 32px;
+$tabs-tab-btn-width: 32px;
+
+.be-layout-tabs-main {
+    background: var(--be-layout-content-background-color);
+    padding: 6px 0;
+    margin: 0 12px 0 12px;
+    display: flex;
+    .el-tabs {
+        --el-tabs-header-height: $tabs-header-height;
+        flex-grow: 1;
+        flex-shrink: 1;
+        overflow: hidden;
+    }
+    .el-tabs--card > .el-tabs__header {
+        border-bottom: none;
+    }
+    .el-tabs__header {
+        margin: 0;
+    }
+    .el-tabs--card > .el-tabs__header .el-tabs__nav {
+        border: none;
+    }
+    .el-tabs__item {
+        padding: 0 16px;
+        line-height: $tabs-header-height;
+        font-weight: inherit;
+        color: #808695;
+        &:hover {
+            .be-tabs-tab-title {
+                color: var(--el-color-primary);
+            }
+        }
+        .be-tabs-tab-title {
+            display: inline-block;
+        }
+        .be-tabs-tab-close {
+            position: relative;
+            font-size: 12px;
+            width: 22px;
+            height: 22px;
+            vertical-align: middle;
+            line-height: 15px;
+            overflow: hidden;
+            top: -1px;
+            right: -6px;
+            transform-origin: 100% 50%;
+            &:hover {
+                color: #444;
+            }
+        }
+    }
+    .el-tabs__item.is-active {
+        .be-tabs-tab-title {
+            color: var(--el-color-primary);
+        }
+    }
+    .el-tabs--card > .el-tabs__header .el-tabs__item {
+        margin-right: 6px;
+        border: none;
+        background-color: #fff;
+        height: $tabs-header-height;
+        border-radius: var(--be-border-radius);
+    }
+    .el-tabs__nav-next,
+    .el-tabs__nav-prev {
+        display: flex;
+        align-items: center;
+        width: $tabs-tab-btn-width;
+        justify-content: center;
+        height: $tabs-header-height;
+    }
+    .el-tabs__nav-wrap.is-scrollable {
+        padding: 0 32px;
+    }
+}
+
+.be-layout-tabs-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $tabs-tab-btn-width;
+    height: $tabs-header-height;
+    background-color: #fff;
+    cursor: pointer;
+}

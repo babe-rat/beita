@@ -9,7 +9,12 @@
         </el-header>
         <el-container class="be-layout">
             <el-aside width="200px"> <side-menu /> </el-aside>
-            <el-main><router-view></router-view></el-main>
+            <el-main class="be-layout-content be-layout-content-with-tabs-fix">
+                <div class="be-layout-tabs be-layout-tabs-fix">
+                    <tabs-nav />
+                </div>
+                <el-main class="be-layout-content-main"><router-view></router-view></el-main>
+            </el-main>
         </el-container>
     </el-container>
 </template>
@@ -18,6 +23,7 @@
 import SideMenu from './components/side-menu'
 import HeaderBar from './components/header-bar'
 import User from './components/user'
+import TabsNav from './components/tags-nav'
 </script>
 
 <style lang="scss" scoped>
@@ -29,5 +35,25 @@ import User from './components/user'
 }
 .be-layout {
     background: #f0f2f5;
+    &-content {
+        padding: 0;
+    }
+    &-tabs {
+        transition: all 0.2s ease-in-out;
+    }
+    &-tabs-fix {
+        position: fixed;
+        z-index: 9;
+        width: calc(100% - 200px);
+    }
+    &-content-with-tabs-fix {
+        .be-layout-content-main {
+            margin-top: 44px;
+        }
+    }
+    &-content-main {
+        padding: 14px;
+        padding-top: 0;
+    }
 }
 </style>
