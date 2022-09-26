@@ -1,5 +1,5 @@
 # 工作流名称
-name: site deploy
+name: example deploy
 
 # 触发 workflow 的名称
 on:
@@ -39,4 +39,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # 推送的文件，既文档站点打包后的产物目录
-          publish_dir: ./site
+          publish_dir: ./dist
