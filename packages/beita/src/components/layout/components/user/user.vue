@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { getCurrentInstance } from 'vue'
-import { useUserStore, useAppConfigStore, useLocaleStore } from '../../../../store'
+import { useUserStore, useLocaleStore } from '../../../../store'
 import { APP_LOGOUT } from '../../../../i18n/locales'
 
 const { getMessage } = useLocaleStore()
@@ -27,13 +27,9 @@ const globalProperties = getCurrentInstance()?.appContext.config.globalPropertie
 
 // 退出登录
 function handleLogout() {
-    const events = useAppConfigStore().app.events
-    if (events?.logout) {
-        events.logout().then(() => {
-            logout()
-            globalProperties?.$router.push('/login')
-        })
-    }
+    logout().then(() => {
+        globalProperties?.$router.push('/login')
+    })
 }
 </script>
 

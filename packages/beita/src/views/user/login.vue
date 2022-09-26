@@ -31,7 +31,7 @@
 <script lang="ts" setup>
 import { reactive, ref, toRaw, getCurrentInstance } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
-import { useLocaleStore, useAppConfigStore, useUserStore } from '../../store'
+import { useLocaleStore, useUserStore } from '../../store'
 import {
     APP_LOGIN_FORM_USERNAME,
     APP_LOGIN_FORM_PASSWORD,
@@ -67,7 +67,6 @@ const rules = reactive<FormRules>({
     ],
 })
 
-const events = useAppConfigStore().app.events
 const globalProperties = getCurrentInstance()?.appContext.config.globalProperties
 
 const submit = (formEl: FormInstance | undefined) => {
@@ -76,20 +75,19 @@ const submit = (formEl: FormInstance | undefined) => {
     }
     formEl.validate(valid => {
         if (valid) {
-            if (events?.login) {
-                loading.value = true
-                events
-                    .login(toRaw(ruleForm), globalProperties?.$router)
-                    .then(res => {
-                        useUserStore().setUser(res)
-                    })
-                    .catch((error: Error) => {
-                        errorMsg.value = error.message
-                    })
-                    .finally(() => {
-                        loading.value = false
-                    })
-            }
+            const userStore = useUserStore()
+            loading.value = true
+            userStore
+                .login(toRaw(ruleForm))
+                .then(() => {
+                    globalProperties?.$router.push('/dashboard')
+                })
+                .catch((error: Error) => {
+                    errorMsg.value = error.message
+                })
+                .finally(() => {
+                    loading.value = false
+                })
         }
     })
 }

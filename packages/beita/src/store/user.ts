@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia'
 import { STORAGE_LOGIN_INFO_KEY, STORAGE_USER_INFO_KEY } from '../utils/constant'
+import userApi, { UserLoginRequestParams } from '../api/user'
+
+export type UserLoginActionParams = UserLoginRequestParams
 
 export interface UserLoginInfo {
     accessToken?: string
-    refreshToken?: string
 }
 
 export interface UserInfo {
@@ -23,17 +25,25 @@ export const useUserStore = defineStore('user', {
     actions: {
         // 清除用户登录本地缓存
         clearUserStorage() {
-            this.loginInfo = {}
             this.userInfo = {}
+            this.loginInfo = {}
         },
 
-        setUser(user: UserInfo) {
+        // 登录
+        async login({ userName, password }: UserLoginActionParams) {
             this.clearUserStorage()
-            this.userInfo = user
+            const res = await userApi.login({ userName, password })
+            const { accessToken } = res
+            this.loginInfo = {
+                accessToken,
+            }
+            this.userInfo = await userApi.getCurrentUser()
         },
 
-        logout() {
-            this.clearUserStorage()
+        async logout() {
+            userApi.logout().then(() => {
+                this.clearUserStorage()
+            })
         },
     },
     persist: [
