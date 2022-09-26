@@ -1,7 +1,7 @@
 import type { App } from 'vue'
 import { createPinia } from 'pinia'
 import merge from 'lodash.merge'
-import PiniaPluginPersist from './.internal/pinia-plugin-persist'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import defaultConfig from './default.config'
 import { useAppConfigStore } from './store/appConfig'
 import router from './router'
@@ -10,7 +10,7 @@ import type { AppOption } from './types'
 
 const pinia = createPinia()
 // 持久化存储
-pinia.use(PiniaPluginPersist)
+pinia.use(piniaPluginPersistedstate)
 
 export default function createBeita(opts: AppOption = {}) {
     return {
@@ -23,12 +23,12 @@ export default function createBeita(opts: AppOption = {}) {
             const appConfig = useAppConfigStore()
             appConfig.set(mergedOption)
 
-            // 挂载 globalProperties
-            app.use(globalProperties)
-
             // 注册路由
             const { mode, base, routes } = mergedOption
             app.use(router, { mode, base, routes })
+
+            // 挂载 globalProperties
+            app.use(globalProperties)
         },
     }
 }

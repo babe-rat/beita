@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import storage from '../utils/storage'
 import { STORAGE_LOGIN_INFO_KEY, STORAGE_USER_INFO_KEY } from '../utils/constant'
 
 export interface UserLoginInfo {
@@ -17,8 +16,8 @@ export interface UserInfo {
 export const useUserStore = defineStore('user', {
     state: (): { loginInfo: UserLoginInfo; userInfo: UserInfo } => {
         return {
-            loginInfo: storage.getItem(STORAGE_LOGIN_INFO_KEY) || {},
-            userInfo: storage.getItem(STORAGE_USER_INFO_KEY) || {},
+            loginInfo: {},
+            userInfo: {},
         }
     },
     actions: {
@@ -26,24 +25,25 @@ export const useUserStore = defineStore('user', {
         clearUserStorage() {
             this.loginInfo = {}
             this.userInfo = {}
-            storage.removeItem(STORAGE_LOGIN_INFO_KEY)
-            storage.removeItem(STORAGE_USER_INFO_KEY)
         },
 
         setUser(user: UserInfo) {
+            this.clearUserStorage()
             this.userInfo = user
         },
+
+        logout() {
+            this.clearUserStorage()
+        },
     },
-    persist: {
-        strategies: [
-            {
-                key: STORAGE_LOGIN_INFO_KEY,
-                paths: 'loginInfo',
-            },
-            {
-                key: STORAGE_USER_INFO_KEY,
-                paths: 'userInfo',
-            },
-        ],
-    },
+    persist: [
+        {
+            key: STORAGE_USER_INFO_KEY,
+            paths: ['userInfo'],
+        },
+        {
+            key: STORAGE_LOGIN_INFO_KEY,
+            paths: ['loginInfo'],
+        },
+    ],
 })

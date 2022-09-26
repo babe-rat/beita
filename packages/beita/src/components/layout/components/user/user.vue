@@ -6,7 +6,7 @@
         </view>
         <template #dropdown>
             <el-dropdown-menu>
-                <el-dropdown-item @click="handleLogout">{{ __i18n(APP_LOGOUT) }}</el-dropdown-item>
+                <el-dropdown-item @click="handleLogout">{{ logoutText }}</el-dropdown-item>
             </el-dropdown-menu>
         </template>
     </el-dropdown>
@@ -14,20 +14,24 @@
 
 <script setup lang="ts">
 import { getCurrentInstance } from 'vue'
-import { useUserStore, useAppConfigStore } from '../../../../store'
+import { useUserStore, useAppConfigStore, useLocaleStore } from '../../../../store'
 import { APP_LOGOUT } from '../../../../i18n/locales'
 
-const { userName, avatar } = useUserStore().userInfo
+const { getMessage } = useLocaleStore()
+const logoutText = getMessage(APP_LOGOUT)
+
+const { userInfo, logout } = useUserStore()
+
+const { userName, avatar } = userInfo
 const globalProperties = getCurrentInstance()?.appContext.config.globalProperties
 
 // 退出登录
 function handleLogout() {
-    useUserStore()
     const events = useAppConfigStore().app.events
     if (events?.logout) {
         events.logout().then(() => {
-            useUserStore().clearUserStorage()
-            globalProperties!.$router.push('/login')
+            logout()
+            globalProperties?.$router.push('/login')
         })
     }
 }

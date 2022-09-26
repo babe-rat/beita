@@ -34,11 +34,7 @@ export const useLocaleStore = defineStore('locale', {
         },
     },
     persist: {
-        strategies: [
-            {
-                key: STORAGE_LOCALE_KEY,
-                paths: 'locale',
-            },
-        ],
+        key: STORAGE_LOCALE_KEY,
+        paths: ['locale'],
     },
 })

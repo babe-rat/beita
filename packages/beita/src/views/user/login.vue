@@ -30,10 +30,8 @@
 
 <script lang="ts" setup>
 import { reactive, ref, toRaw, getCurrentInstance } from 'vue'
-import { Router } from 'vue-router'
 import type { FormInstance, FormRules } from 'element-plus'
-import { useLocaleStore } from '../../store/locale'
-import { useAppConfigStore } from '../../store/appConfig'
+import { useLocaleStore, useAppConfigStore, useUserStore } from '../../store'
 import {
     APP_LOGIN_FORM_USERNAME,
     APP_LOGIN_FORM_PASSWORD,
@@ -81,10 +79,9 @@ const submit = (formEl: FormInstance | undefined) => {
             if (events?.login) {
                 loading.value = true
                 events
-                    .login(toRaw(ruleForm))
-                    .then((callback: (router: Router) => void | PromiseLike<void>) => {
-                        // TODO
-                        callback && callback(globalProperties?.$router)
+                    .login(toRaw(ruleForm), globalProperties?.$router)
+                    .then(res => {
+                        useUserStore().setUser(res)
                     })
                     .catch((error: Error) => {
                         errorMsg.value = error.message
