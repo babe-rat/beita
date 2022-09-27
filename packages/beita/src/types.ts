@@ -14,7 +14,7 @@ export interface AppOption {
     title?: string
     logo?: string
     base?: string
-    mode?: RouteMode
+    mode?: 'hash' | 'history'
     routes?: RouteRecordRaw[]
     events?: AppConfigEvents
 }
