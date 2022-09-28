@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAppConfigStore } from '../../../../store/appConfig'
+import { useAppConfigStore } from '../../../store/appConfig'
 
 const { logo, title } = useAppConfigStore().app
 </script>

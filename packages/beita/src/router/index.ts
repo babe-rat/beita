@@ -33,7 +33,7 @@ export default {
                 ...innerRoutes,
                 {
                     path: '/',
-                    component: () => import('../components/layout'),
+                    component: () => import('../layout'),
                     children: [
                         ...routes,
                         {

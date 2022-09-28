@@ -14,8 +14,8 @@
 
 <script setup lang="ts">
 import { getCurrentInstance } from 'vue'
-import { useUserStore, useLocaleStore } from '../../../../store'
-import { APP_LOGOUT } from '../../../../i18n/locales'
+import { useUserStore, useLocaleStore } from '../../../store'
+import { APP_LOGOUT } from '../../../i18n/locales'
 
 const { getMessage } = useLocaleStore()
 const logoutText = getMessage(APP_LOGOUT)

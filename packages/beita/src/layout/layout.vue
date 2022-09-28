@@ -24,6 +24,9 @@ import SideMenu from './components/side-menu'
 import HeaderBar from './components/header-bar'
 import User from './components/user'
 import TabsNav from './components/tags-nav'
+import { useMenusStore } from '../store'
+
+useMenusStore().fetchMenuList()
 </script>
 
 <style lang="scss" scoped>
